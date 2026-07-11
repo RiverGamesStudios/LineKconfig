@@ -1,0 +1,26 @@
+config.log
+config.status
+configure~
+libtool
+Makefile
+autom4te.cache
+
+.deps
+.libs
+.dirstamp
+
+scripts/.autostuff/config.h
+scripts/.autostuff/stamp-h1
+libs/parser/kconfig-parser.pc
+
+*.o
+*.a
+*.la
+*.lo
+
+# Binaries
+utils/kconfig-tweak
+utils/kconfig-gettext
+frontends/conf/kconfig-conf
+frontends/mconf/kconfig-mconf
+frontends/nconf/kconfig-nconf
