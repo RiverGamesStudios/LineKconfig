@@ -96,63 +96,34 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 bin_PROGRAMS = $(am__EXEEXT_1) $(am__EXEEXT_2) $(am__EXEEXT_3) \
-	$(am__EXEEXT_4) $(am__EXEEXT_5) $(am__EXEEXT_7)
+	$(am__EXEEXT_5)
 
 #--------------------------
 # lxdialog lib (for mconf)
 @COND_lxdialog_TRUE@am__append_1 = libs/lxdialog/libkconfig-lxdialog.a
 
-#--------------------------
-# kconfig meta frontend
-@COND_images_TRUE@am__append_2 = libs/images/libkconfig-images.a
-@COND_images_TRUE@am__append_3 = \
-@COND_images_TRUE@	libs/images/images.c \
-@COND_images_TRUE@	libs/images/images.h
-
-@COND_images_TRUE@am__append_4 = \
-@COND_images_TRUE@	libs/images/images.c \
-@COND_images_TRUE@	libs/images/images.h
-
-
 #===============================================================================
 # Frontends
 
 #--------------------------
-# kconfig meta frontend
-@COND_kconfig_TRUE@am__append_5 = frontends/kconfig
-@COND_kconfig_TRUE@am__append_6 = frontends/kconfig.in
-
-#--------------------------
 # conf frontend
-@COND_conf_TRUE@am__append_7 = frontends/conf/kconfig-conf
+@COND_conf_TRUE@am__append_2 = frontends/conf/kconfig-conf
 
 #--------------------------
 # mconf frontend
-@COND_mconf_TRUE@am__append_8 = frontends/mconf/kconfig-mconf
+@COND_mconf_TRUE@am__append_3 = frontends/mconf/kconfig-mconf
 
 #--------------------------
 # nconf frontend
-@COND_nconf_TRUE@am__append_9 = frontends/nconf/kconfig-nconf
-
-#--------------------------
-# gconf frontend
-@COND_gconf_TRUE@am__append_10 = frontends/gconf/kconfig-gconf
-@COND_gconf_TRUE@am__append_11 = frontends/gconf/gconf.c.patch
-
-#--------------------------
-# gconf frontend
-@COND_qconf_TRUE@am__append_12 = frontends/qconf/kconfig-qconf
-@COND_qconf_TRUE@am__append_13 = frontends/qconf/qconf.moc
-@COND_qconf_TRUE@am__append_14 = frontends/qconf/qconf.moc
-@COND_qconf_TRUE@am__append_15 = frontends/qconf/qconf.cc.patch
+@COND_nconf_TRUE@am__append_4 = frontends/nconf/kconfig-nconf
 
 #===============================================================================
 # Utilities
-@COND_utils_TRUE@am__append_16 = utils/kconfig-tweak
-@COND_utils_TRUE@am__append_17 = utils/kconfig-diff utils/kconfig-merge
-@COND_utils_TRUE@am__append_18 = $(MAYBE_utils_gettext)
-@COND_utils_TRUE@am__append_19 = utils/kconfig-tweak
-@COND_utils_TRUE@am__append_20 = \
+@COND_utils_TRUE@am__append_5 = utils/kconfig-tweak
+@COND_utils_TRUE@am__append_6 = utils/kconfig-diff utils/kconfig-merge
+@COND_utils_TRUE@am__append_7 = $(MAYBE_utils_gettext)
+@COND_utils_TRUE@am__append_8 = utils/kconfig-tweak
+@COND_utils_TRUE@am__append_9 = \
 @COND_utils_TRUE@	utils/kconfig-tweak.in \
 @COND_utils_TRUE@	utils/kconfig-tweak.in.patch
 
@@ -181,17 +152,11 @@ CONFIG_CLEAN_VPATH_FILES =
 @COND_mconf_TRUE@	frontends/mconf/kconfig-mconf$(EXEEXT)
 @COND_nconf_TRUE@am__EXEEXT_3 =  \
 @COND_nconf_TRUE@	frontends/nconf/kconfig-nconf$(EXEEXT)
-@COND_gconf_TRUE@am__EXEEXT_4 =  \
-@COND_gconf_TRUE@	frontends/gconf/kconfig-gconf$(EXEEXT)
-@COND_qconf_TRUE@am__EXEEXT_5 =  \
-@COND_qconf_TRUE@	frontends/qconf/kconfig-qconf$(EXEEXT)
-@COND_utils_TRUE@@COND_utils_gettext_TRUE@am__EXEEXT_6 = utils/kconfig-gettext$(EXEEXT)
-@COND_utils_TRUE@am__EXEEXT_7 = $(am__EXEEXT_6)
+@COND_utils_TRUE@@COND_utils_gettext_TRUE@am__EXEEXT_4 = utils/kconfig-gettext$(EXEEXT)
+@COND_utils_TRUE@am__EXEEXT_5 = $(am__EXEEXT_4)
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(libdir)" \
 	"$(DESTDIR)$(bindir)" "$(DESTDIR)$(bindir)" \
-	"$(DESTDIR)$(docdir)" \
-	"$(DESTDIR)$(frontends_gconf_kconfig_gconfdir)" \
-	"$(DESTDIR)$(pkgconfigdir)" \
+	"$(DESTDIR)$(docdir)" "$(DESTDIR)$(pkgconfigdir)" \
 	"$(DESTDIR)$(libs_parser_kconfig_includedir)"
 PROGRAMS = $(bin_PROGRAMS)
 LIBRARIES = $(noinst_LIBRARIES)
@@ -227,18 +192,6 @@ AM_V_AR = $(am__v_AR_@AM_V@)
 am__v_AR_ = $(am__v_AR_@AM_DEFAULT_V@)
 am__v_AR_0 = @echo "  AR      " $@;
 am__v_AR_1 = 
-libs_images_libkconfig_images_a_AR = $(AR) $(ARFLAGS)
-libs_images_libkconfig_images_a_RANLIB = $(RANLIB)
-libs_images_libkconfig_images_a_LIBADD =
-am__libs_images_libkconfig_images_a_SOURCES_DIST =  \
-	libs/images/images.c_orig
-am_libs_images_libkconfig_images_a_OBJECTS =
-am__dirstamp = $(am__leading_dot)dirstamp
-@COND_images_TRUE@nodist_libs_images_libkconfig_images_a_OBJECTS =  \
-@COND_images_TRUE@	libs/images/images.$(OBJEXT)
-libs_images_libkconfig_images_a_OBJECTS =  \
-	$(am_libs_images_libkconfig_images_a_OBJECTS) \
-	$(nodist_libs_images_libkconfig_images_a_OBJECTS)
 libs_lxdialog_libkconfig_lxdialog_a_AR = $(AR) $(ARFLAGS)
 libs_lxdialog_libkconfig_lxdialog_a_RANLIB = $(RANLIB)
 libs_lxdialog_libkconfig_lxdialog_a_LIBADD =
@@ -247,6 +200,7 @@ am__libs_lxdialog_libkconfig_lxdialog_a_SOURCES_DIST =  \
 	libs/lxdialog/inputbox.c libs/lxdialog/menubox.c \
 	libs/lxdialog/textbox.c libs/lxdialog/util.c \
 	libs/lxdialog/yesno.c
+am__dirstamp = $(am__leading_dot)dirstamp
 @COND_lxdialog_TRUE@am_libs_lxdialog_libkconfig_lxdialog_a_OBJECTS = libs/lxdialog/libkconfig_lxdialog_a-checklist.$(OBJEXT) \
 @COND_lxdialog_TRUE@	libs/lxdialog/libkconfig_lxdialog_a-inputbox.$(OBJEXT) \
 @COND_lxdialog_TRUE@	libs/lxdialog/libkconfig_lxdialog_a-menubox.$(OBJEXT) \
@@ -280,19 +234,6 @@ frontends_conf_kconfig_conf_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
 	$(frontends_conf_kconfig_conf_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
-am__frontends_gconf_kconfig_gconf_SOURCES_DIST =  \
-	frontends/gconf/gconf.c frontends/gconf/gconf.glade
-@COND_gconf_TRUE@am_frontends_gconf_kconfig_gconf_OBJECTS = frontends/gconf/kconfig_gconf-gconf.$(OBJEXT)
-frontends_gconf_kconfig_gconf_OBJECTS =  \
-	$(am_frontends_gconf_kconfig_gconf_OBJECTS)
-@COND_gconf_TRUE@frontends_gconf_kconfig_gconf_DEPENDENCIES = $(top_builddir)/libs/parser/libkconfig-parser.la \
-@COND_gconf_TRUE@	$(top_builddir)/libs/images/libkconfig-images.a \
-@COND_gconf_TRUE@	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-@COND_gconf_TRUE@	$(am__DEPENDENCIES_1)
-frontends_gconf_kconfig_gconf_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
-	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
-	$(frontends_gconf_kconfig_gconf_CFLAGS) $(CFLAGS) \
-	$(AM_LDFLAGS) $(LDFLAGS) -o $@
 am__frontends_mconf_kconfig_mconf_SOURCES_DIST =  \
 	frontends/mconf/mconf.c
 @COND_mconf_TRUE@am_frontends_mconf_kconfig_mconf_OBJECTS = frontends/mconf/kconfig_mconf-mconf.$(OBJEXT)
@@ -319,19 +260,6 @@ frontends_nconf_kconfig_nconf_OBJECTS =  \
 frontends_nconf_kconfig_nconf_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
 	$(frontends_nconf_kconfig_nconf_CFLAGS) $(CFLAGS) \
-	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-am__frontends_qconf_kconfig_qconf_SOURCES_DIST =  \
-	frontends/qconf/qconf.cc frontends/qconf/qconf.h
-@COND_qconf_TRUE@am_frontends_qconf_kconfig_qconf_OBJECTS = frontends/qconf/kconfig_qconf-qconf.$(OBJEXT)
-frontends_qconf_kconfig_qconf_OBJECTS =  \
-	$(am_frontends_qconf_kconfig_qconf_OBJECTS)
-@COND_qconf_TRUE@frontends_qconf_kconfig_qconf_DEPENDENCIES = $(top_builddir)/libs/parser/libkconfig-parser.la \
-@COND_qconf_TRUE@	$(top_builddir)/libs/images/libkconfig-images.a \
-@COND_qconf_TRUE@	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-@COND_qconf_TRUE@	$(am__DEPENDENCIES_1)
-frontends_qconf_kconfig_qconf_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
-	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
-	$(frontends_qconf_kconfig_qconf_CXXFLAGS) $(CXXFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
 am__utils_kconfig_gettext_SOURCES_DIST = utils/gettext.c
 @COND_utils_TRUE@am_utils_kconfig_gettext_OBJECTS =  \
@@ -361,12 +289,9 @@ DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)/scripts/.autostuff
 depcomp = $(SHELL) $(top_srcdir)/scripts/.autostuff/scripts/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = frontends/conf/$(DEPDIR)/kconfig_conf-conf.Po \
-	frontends/gconf/$(DEPDIR)/kconfig_gconf-gconf.Po \
 	frontends/mconf/$(DEPDIR)/kconfig_mconf-mconf.Po \
 	frontends/nconf/$(DEPDIR)/kconfig_nconf-nconf.Po \
 	frontends/nconf/$(DEPDIR)/kconfig_nconf-nconf.gui.Po \
-	frontends/qconf/$(DEPDIR)/kconfig_qconf-qconf.Po \
-	libs/images/$(DEPDIR)/images.Po \
 	libs/lxdialog/$(DEPDIR)/libkconfig_lxdialog_a-checklist.Po \
 	libs/lxdialog/$(DEPDIR)/libkconfig_lxdialog_a-inputbox.Po \
 	libs/lxdialog/$(DEPDIR)/libkconfig_lxdialog_a-menubox.Po \
@@ -401,24 +326,6 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
-	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
-LTCXXCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) \
-	$(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) \
-	$(AM_CXXFLAGS) $(CXXFLAGS)
-AM_V_CXX = $(am__v_CXX_@AM_V@)
-am__v_CXX_ = $(am__v_CXX_@AM_DEFAULT_V@)
-am__v_CXX_0 = @echo "  CXX     " $@;
-am__v_CXX_1 = 
-CXXLD = $(CXX)
-CXXLINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-AM_V_CXXLD = $(am__v_CXXLD_@AM_V@)
-am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
-am__v_CXXLD_0 = @echo "  CXXLD   " $@;
-am__v_CXXLD_1 = 
 LEXCOMPILE = $(LEX) $(AM_LFLAGS) $(LFLAGS)
 LTLEXCOMPILE = $(LIBTOOL) $(AM_V_lt) $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=compile $(LEX) $(AM_LFLAGS) $(LFLAGS)
@@ -436,34 +343,27 @@ AM_V_YACC = $(am__v_YACC_@AM_V@)
 am__v_YACC_ = $(am__v_YACC_@AM_DEFAULT_V@)
 am__v_YACC_0 = @echo "  YACC    " $@;
 am__v_YACC_1 = 
-SOURCES = $(libs_images_libkconfig_images_a_SOURCES) \
-	$(nodist_libs_images_libkconfig_images_a_SOURCES) \
-	$(libs_lxdialog_libkconfig_lxdialog_a_SOURCES) \
+SOURCES = $(libs_lxdialog_libkconfig_lxdialog_a_SOURCES) \
 	$(libs_parser_libkconfig_parser_la_SOURCES) \
 	$(dist_EXTRA_libs_parser_libkconfig_parser_la_SOURCES) \
 	$(frontends_conf_kconfig_conf_SOURCES) \
-	$(frontends_gconf_kconfig_gconf_SOURCES) \
 	$(frontends_mconf_kconfig_mconf_SOURCES) \
 	$(frontends_nconf_kconfig_nconf_SOURCES) \
-	$(frontends_qconf_kconfig_qconf_SOURCES) \
 	$(utils_kconfig_gettext_SOURCES)
-DIST_SOURCES = $(am__libs_images_libkconfig_images_a_SOURCES_DIST) \
+DIST_SOURCES =  \
 	$(am__libs_lxdialog_libkconfig_lxdialog_a_SOURCES_DIST) \
 	$(libs_parser_libkconfig_parser_la_SOURCES) \
 	$(dist_EXTRA_libs_parser_libkconfig_parser_la_SOURCES) \
 	$(am__frontends_conf_kconfig_conf_SOURCES_DIST) \
-	$(am__frontends_gconf_kconfig_gconf_SOURCES_DIST) \
 	$(am__frontends_mconf_kconfig_mconf_SOURCES_DIST) \
 	$(am__frontends_nconf_kconfig_nconf_SOURCES_DIST) \
-	$(am__frontends_qconf_kconfig_qconf_SOURCES_DIST) \
 	$(am__utils_kconfig_gettext_SOURCES_DIST)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
-DATA = $(dist_doc_DATA) $(frontends_gconf_kconfig_gconf_DATA) \
-	$(pkgconfig_DATA)
+DATA = $(dist_doc_DATA) $(pkgconfig_DATA)
 HEADERS = $(libs_parser_kconfig_include_HEADERS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 # Read a list of newline-separated strings from the standard input,
@@ -542,10 +442,6 @@ CFLAGS = @CFLAGS@
 CPPFLAGS = @CPPFLAGS@
 CSCOPE = @CSCOPE@
 CTAGS = @CTAGS@
-CXX = @CXX@
-CXXCPP = @CXXCPP@
-CXXDEPMODE = @CXXDEPMODE@
-CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
@@ -560,7 +456,6 @@ ETAGS = @ETAGS@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 GPERF = @GPERF@
-GPERF_LEN_TYPE = @GPERF_LEN_TYPE@
 GREP = @GREP@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
@@ -583,7 +478,6 @@ LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 MAKEINFO = @MAKEINFO@
 MANIFEST_TOOL = @MANIFEST_TOOL@
 MKDIR_P = @MKDIR_P@
-MOC = @MOC@
 NM = @NM@
 NMEDIT = @NMEDIT@
 OBJDUMP = @OBJDUMP@
@@ -598,11 +492,6 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
-PKG_CONFIG = @PKG_CONFIG@
-PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
-PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
-Qt5_CFLAGS = @Qt5_CFLAGS@
-Qt5_LIBS = @Qt5_LIBS@
 RANLIB = @RANLIB@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
@@ -618,7 +507,6 @@ abs_top_builddir = @abs_top_builddir@
 abs_top_srcdir = @abs_top_srcdir@
 ac_ct_AR = @ac_ct_AR@
 ac_ct_CC = @ac_ct_CC@
-ac_ct_CXX = @ac_ct_CXX@
 ac_ct_DUMPBIN = @ac_ct_DUMPBIN@
 am__include = @am__include@
 am__leading_dot = @am__leading_dot@
@@ -643,16 +531,10 @@ dvidir = @dvidir@
 enable_L10n = @enable_L10n@
 enable_conf = @enable_conf@
 enable_frontends = @enable_frontends@
-enable_gconf = @enable_gconf@
-enable_kconfig = @enable_kconfig@
 enable_mconf = @enable_mconf@
 enable_nconf = @enable_nconf@
-enable_qconf = @enable_qconf@
 enable_utils = @enable_utils@
 exec_prefix = @exec_prefix@
-gconf_EXTRA_LIBS = @gconf_EXTRA_LIBS@
-gtk_CFLAGS = @gtk_CFLAGS@
-gtk_LIBS = @gtk_LIBS@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -683,7 +565,6 @@ pdfdir = @pdfdir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
 psdir = @psdir@
-qconf_EXTRA_LIBS = @qconf_EXTRA_LIBS@
 root_menu = @root_menu@
 runstatedir = @runstatedir@
 sbindir = @sbindir@
@@ -706,14 +587,13 @@ SILENT_MAKEFLAGS_1 =
 # Misc. scripts
 EXTRA_DIST = .version libs/parser/hconf.c \
 	libs/parser/hconf.gperf.patch libs/parser/yconf.y.patch \
-	libs/parser/kconfig-parser.pc.in $(am__append_6) \
-	$(am__append_11) $(am__append_15) $(am__append_20) \
+	libs/parser/kconfig-parser.pc.in $(am__append_9) \
 	scripts/ksync.sh scripts/ksync.list scripts/version.sh
-bin_SCRIPTS = $(am__append_5) $(am__append_16)
-dist_bin_SCRIPTS = $(am__append_17)
+bin_SCRIPTS = $(am__append_5)
+dist_bin_SCRIPTS = $(am__append_6)
 lib_LTLIBRARIES = libs/parser/libkconfig-parser.la
-noinst_LIBRARIES = $(am__append_1) $(am__append_2)
-CLEANFILES = $(am__append_4) $(am__append_14) $(am__append_19)
+noinst_LIBRARIES = $(am__append_1)
+CLEANFILES = $(am__append_8)
 DISTCLEANFILES = libs/parser/kconfig-parser.pc
 # Still, .c files generated from .y files are not cleaned by default,
 # so yconf.c must be explicitly listed:
@@ -722,8 +602,7 @@ MAINTAINERCLEANFILES = libs/parser/hconf.c libs/parser/lconf.c \
 
 # yconf.c not listed, because it is the real _SOURCES, but others are
 # in _EXTRA_SOURCES (above), so must be listed:
-BUILT_SOURCES = libs/parser/hconf.c libs/parser/lconf.c \
-	frontends/kconfig $(am__append_3) $(am__append_13)
+BUILT_SOURCES = libs/parser/hconf.c libs/parser/lconf.c
 
 #===============================================================================
 # Docs
@@ -798,8 +677,6 @@ pkgconfig_DATA = libs/parser/kconfig-parser.pc
 @COND_lxdialog_TRUE@	$(AM_CFLAGS) \
 @COND_lxdialog_TRUE@	$(kf_CFLAGS)
 
-@COND_images_TRUE@libs_images_libkconfig_images_a_SOURCES = libs/images/images.c_orig
-@COND_images_TRUE@nodist_libs_images_libkconfig_images_a_SOURCES = libs/images/images.c
 @COND_conf_TRUE@frontends_conf_kconfig_conf_SOURCES = frontends/conf/conf.c
 @COND_conf_TRUE@frontends_conf_kconfig_conf_CPPFLAGS = \
 @COND_conf_TRUE@	$(AM_CPPFLAGS) \
@@ -852,57 +729,6 @@ pkgconfig_DATA = libs/parser/kconfig-parser.pc
 @COND_nconf_TRUE@	$(intl_LIBS) $(ncurses_panel_menu_LIBS) $(ncurses_LIBS) \
 @COND_nconf_TRUE@	$(nconf_EXTRA_LIBS)
 
-@COND_gconf_TRUE@frontends_gconf_kconfig_gconf_SOURCES = \
-@COND_gconf_TRUE@	frontends/gconf/gconf.c \
-@COND_gconf_TRUE@	frontends/gconf/gconf.glade
-
-@COND_gconf_TRUE@frontends_gconf_kconfig_gconf_CPPFLAGS = \
-@COND_gconf_TRUE@	$(AM_CPPFLAGS) \
-@COND_gconf_TRUE@	$(intl_CPPFLAGS) \
-@COND_gconf_TRUE@	-I$(top_srcdir)/libs/parser \
-@COND_gconf_TRUE@	-I$(top_builddir)/libs/images \
-@COND_gconf_TRUE@	-DGUI_PATH='"$(pkgdatadir)/gconf.glade"'
-
-@COND_gconf_TRUE@frontends_gconf_kconfig_gconf_CFLAGS = \
-@COND_gconf_TRUE@	$(AM_CFLAGS) \
-@COND_gconf_TRUE@	$(kf_CFLAGS) \
-@COND_gconf_TRUE@	$(gtk_CFLAGS)
-
-@COND_gconf_TRUE@frontends_gconf_kconfig_gconf_LDADD = \
-@COND_gconf_TRUE@	$(top_builddir)/libs/parser/libkconfig-parser.la \
-@COND_gconf_TRUE@	$(top_builddir)/libs/images/libkconfig-images.a \
-@COND_gconf_TRUE@	$(intl_LIBS) \
-@COND_gconf_TRUE@	$(gtk_LIBS) \
-@COND_gconf_TRUE@	$(gconf_EXTRA_LIBS)
-
-@COND_gconf_TRUE@frontends_gconf_kconfig_gconfdir = $(pkgdatadir)
-@COND_gconf_TRUE@frontends_gconf_kconfig_gconf_DATA = frontends/gconf/gconf.glade
-@COND_qconf_TRUE@frontends_qconf_kconfig_qconf_SOURCES = \
-@COND_qconf_TRUE@	frontends/qconf/qconf.cc \
-@COND_qconf_TRUE@	frontends/qconf/qconf.h
-
-@COND_qconf_TRUE@frontends_qconf_kconfig_qconf_CPPFLAGS = \
-@COND_qconf_TRUE@	$(AM_CPPFLAGS) \
-@COND_qconf_TRUE@	$(intl_CPPFLAGS) \
-@COND_qconf_TRUE@	-I$(top_srcdir)/libs/parser \
-@COND_qconf_TRUE@	-I$(top_builddir)/libs/images \
-@COND_qconf_TRUE@	-I$(top_builddir)/frontends/qconf
-
-@COND_qconf_TRUE@frontends_qconf_kconfig_qconf_CXXFLAGS = \
-@COND_qconf_TRUE@	$(AM_CXXFLAGS) \
-@COND_qconf_TRUE@	$(kf_CFLAGS) \
-@COND_qconf_TRUE@	$(Qt5_CFLAGS) \
-@COND_qconf_TRUE@	-fPIC -std=c++11
-
-@COND_qconf_TRUE@frontends_qconf_kconfig_qconf_LDADD = \
-@COND_qconf_TRUE@	$(top_builddir)/libs/parser/libkconfig-parser.la \
-@COND_qconf_TRUE@	$(top_builddir)/libs/images/libkconfig-images.a \
-@COND_qconf_TRUE@	$(intl_LIBS) $(Qt5_LIBS) $(qconf_EXTRA_LIBS)
-
-@COND_qconf_TRUE@AM_V_MOC = $(AM_V_MOC_$(V))
-@COND_qconf_TRUE@AM_V_MOC_ = $(AM_V_MOC_$(AM_DEFAULT_VERBOSITY))
-@COND_qconf_TRUE@AM_V_MOC_0 = @echo "  MOC     " $@;
-@COND_qconf_TRUE@AM_V_MOC_1 = 
 @COND_utils_TRUE@@COND_utils_gettext_TRUE@MAYBE_utils_gettext = utils/kconfig-gettext
 @COND_utils_TRUE@utils_kconfig_gettext_SOURCES = utils/gettext.c
 @COND_utils_TRUE@utils_kconfig_gettext_CPPFLAGS = \
@@ -921,7 +747,7 @@ all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
 .SUFFIXES:
-.SUFFIXES: .gperf .c .cc .h .l .lo .moc .o .obj .y
+.SUFFIXES: .gperf .c .l .lo .o .obj .y
 am--refresh: Makefile
 	@:
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
@@ -1052,19 +878,6 @@ clean-libLTLIBRARIES:
 	      sort -u`; \
 	echo rm -f $${locs}; \
 	$(am__rm_f) $${locs}
-libs/images/$(am__dirstamp):
-	@$(MKDIR_P) libs/images
-	@: >>libs/images/$(am__dirstamp)
-libs/images/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) libs/images/$(DEPDIR)
-	@: >>libs/images/$(DEPDIR)/$(am__dirstamp)
-libs/images/images.$(OBJEXT): libs/images/$(am__dirstamp) \
-	libs/images/$(DEPDIR)/$(am__dirstamp)
-
-libs/images/libkconfig-images.a: $(libs_images_libkconfig_images_a_OBJECTS) $(libs_images_libkconfig_images_a_DEPENDENCIES) $(EXTRA_libs_images_libkconfig_images_a_DEPENDENCIES) libs/images/$(am__dirstamp)
-	$(AM_V_at)-rm -f libs/images/libkconfig-images.a
-	$(AM_V_AR)$(libs_images_libkconfig_images_a_AR) libs/images/libkconfig-images.a $(libs_images_libkconfig_images_a_OBJECTS) $(libs_images_libkconfig_images_a_LIBADD)
-	$(AM_V_at)$(libs_images_libkconfig_images_a_RANLIB) libs/images/libkconfig-images.a
 libs/lxdialog/$(am__dirstamp):
 	@$(MKDIR_P) libs/lxdialog
 	@: >>libs/lxdialog/$(am__dirstamp)
@@ -1137,19 +950,6 @@ frontends/conf/kconfig_conf-conf.$(OBJEXT):  \
 frontends/conf/kconfig-conf$(EXEEXT): $(frontends_conf_kconfig_conf_OBJECTS) $(frontends_conf_kconfig_conf_DEPENDENCIES) $(EXTRA_frontends_conf_kconfig_conf_DEPENDENCIES) frontends/conf/$(am__dirstamp)
 	@rm -f frontends/conf/kconfig-conf$(EXEEXT)
 	$(AM_V_CCLD)$(frontends_conf_kconfig_conf_LINK) $(frontends_conf_kconfig_conf_OBJECTS) $(frontends_conf_kconfig_conf_LDADD) $(LIBS)
-frontends/gconf/$(am__dirstamp):
-	@$(MKDIR_P) frontends/gconf
-	@: >>frontends/gconf/$(am__dirstamp)
-frontends/gconf/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) frontends/gconf/$(DEPDIR)
-	@: >>frontends/gconf/$(DEPDIR)/$(am__dirstamp)
-frontends/gconf/kconfig_gconf-gconf.$(OBJEXT):  \
-	frontends/gconf/$(am__dirstamp) \
-	frontends/gconf/$(DEPDIR)/$(am__dirstamp)
-
-frontends/gconf/kconfig-gconf$(EXEEXT): $(frontends_gconf_kconfig_gconf_OBJECTS) $(frontends_gconf_kconfig_gconf_DEPENDENCIES) $(EXTRA_frontends_gconf_kconfig_gconf_DEPENDENCIES) frontends/gconf/$(am__dirstamp)
-	@rm -f frontends/gconf/kconfig-gconf$(EXEEXT)
-	$(AM_V_CCLD)$(frontends_gconf_kconfig_gconf_LINK) $(frontends_gconf_kconfig_gconf_OBJECTS) $(frontends_gconf_kconfig_gconf_LDADD) $(LIBS)
 frontends/mconf/$(am__dirstamp):
 	@$(MKDIR_P) frontends/mconf
 	@: >>frontends/mconf/$(am__dirstamp)
@@ -1179,19 +979,6 @@ frontends/nconf/kconfig_nconf-nconf.gui.$(OBJEXT):  \
 frontends/nconf/kconfig-nconf$(EXEEXT): $(frontends_nconf_kconfig_nconf_OBJECTS) $(frontends_nconf_kconfig_nconf_DEPENDENCIES) $(EXTRA_frontends_nconf_kconfig_nconf_DEPENDENCIES) frontends/nconf/$(am__dirstamp)
 	@rm -f frontends/nconf/kconfig-nconf$(EXEEXT)
 	$(AM_V_CCLD)$(frontends_nconf_kconfig_nconf_LINK) $(frontends_nconf_kconfig_nconf_OBJECTS) $(frontends_nconf_kconfig_nconf_LDADD) $(LIBS)
-frontends/qconf/$(am__dirstamp):
-	@$(MKDIR_P) frontends/qconf
-	@: >>frontends/qconf/$(am__dirstamp)
-frontends/qconf/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) frontends/qconf/$(DEPDIR)
-	@: >>frontends/qconf/$(DEPDIR)/$(am__dirstamp)
-frontends/qconf/kconfig_qconf-qconf.$(OBJEXT):  \
-	frontends/qconf/$(am__dirstamp) \
-	frontends/qconf/$(DEPDIR)/$(am__dirstamp)
-
-frontends/qconf/kconfig-qconf$(EXEEXT): $(frontends_qconf_kconfig_qconf_OBJECTS) $(frontends_qconf_kconfig_qconf_DEPENDENCIES) $(EXTRA_frontends_qconf_kconfig_qconf_DEPENDENCIES) frontends/qconf/$(am__dirstamp)
-	@rm -f frontends/qconf/kconfig-qconf$(EXEEXT)
-	$(AM_V_CXXLD)$(frontends_qconf_kconfig_qconf_LINK) $(frontends_qconf_kconfig_qconf_OBJECTS) $(frontends_qconf_kconfig_qconf_LDADD) $(LIBS)
 utils/$(am__dirstamp):
 	@$(MKDIR_P) utils
 	@: >>utils/$(am__dirstamp)
@@ -1278,11 +1065,8 @@ uninstall-dist_binSCRIPTS:
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
 	-rm -f frontends/conf/*.$(OBJEXT)
-	-rm -f frontends/gconf/*.$(OBJEXT)
 	-rm -f frontends/mconf/*.$(OBJEXT)
 	-rm -f frontends/nconf/*.$(OBJEXT)
-	-rm -f frontends/qconf/*.$(OBJEXT)
-	-rm -f libs/images/*.$(OBJEXT)
 	-rm -f libs/lxdialog/*.$(OBJEXT)
 	-rm -f libs/parser/*.$(OBJEXT)
 	-rm -f libs/parser/*.lo
@@ -1292,12 +1076,9 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@frontends/conf/$(DEPDIR)/kconfig_conf-conf.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@frontends/gconf/$(DEPDIR)/kconfig_gconf-gconf.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@frontends/mconf/$(DEPDIR)/kconfig_mconf-mconf.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@frontends/nconf/$(DEPDIR)/kconfig_nconf-nconf.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@frontends/nconf/$(DEPDIR)/kconfig_nconf-nconf.gui.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@frontends/qconf/$(DEPDIR)/kconfig_qconf-qconf.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@libs/images/$(DEPDIR)/images.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@libs/lxdialog/$(DEPDIR)/libkconfig_lxdialog_a-checklist.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@libs/lxdialog/$(DEPDIR)/libkconfig_lxdialog_a-inputbox.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@libs/lxdialog/$(DEPDIR)/libkconfig_lxdialog_a-menubox.Po@am__quote@ # am--include-marker
@@ -1498,20 +1279,6 @@ frontends/conf/kconfig_conf-conf.obj: frontends/conf/conf.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(frontends_conf_kconfig_conf_CPPFLAGS) $(CPPFLAGS) $(frontends_conf_kconfig_conf_CFLAGS) $(CFLAGS) -c -o frontends/conf/kconfig_conf-conf.obj `if test -f 'frontends/conf/conf.c'; then $(CYGPATH_W) 'frontends/conf/conf.c'; else $(CYGPATH_W) '$(srcdir)/frontends/conf/conf.c'; fi`
 
-frontends/gconf/kconfig_gconf-gconf.o: frontends/gconf/gconf.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(frontends_gconf_kconfig_gconf_CPPFLAGS) $(CPPFLAGS) $(frontends_gconf_kconfig_gconf_CFLAGS) $(CFLAGS) -MT frontends/gconf/kconfig_gconf-gconf.o -MD -MP -MF frontends/gconf/$(DEPDIR)/kconfig_gconf-gconf.Tpo -c -o frontends/gconf/kconfig_gconf-gconf.o `test -f 'frontends/gconf/gconf.c' || echo '$(srcdir)/'`frontends/gconf/gconf.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) frontends/gconf/$(DEPDIR)/kconfig_gconf-gconf.Tpo frontends/gconf/$(DEPDIR)/kconfig_gconf-gconf.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='frontends/gconf/gconf.c' object='frontends/gconf/kconfig_gconf-gconf.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(frontends_gconf_kconfig_gconf_CPPFLAGS) $(CPPFLAGS) $(frontends_gconf_kconfig_gconf_CFLAGS) $(CFLAGS) -c -o frontends/gconf/kconfig_gconf-gconf.o `test -f 'frontends/gconf/gconf.c' || echo '$(srcdir)/'`frontends/gconf/gconf.c
-
-frontends/gconf/kconfig_gconf-gconf.obj: frontends/gconf/gconf.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(frontends_gconf_kconfig_gconf_CPPFLAGS) $(CPPFLAGS) $(frontends_gconf_kconfig_gconf_CFLAGS) $(CFLAGS) -MT frontends/gconf/kconfig_gconf-gconf.obj -MD -MP -MF frontends/gconf/$(DEPDIR)/kconfig_gconf-gconf.Tpo -c -o frontends/gconf/kconfig_gconf-gconf.obj `if test -f 'frontends/gconf/gconf.c'; then $(CYGPATH_W) 'frontends/gconf/gconf.c'; else $(CYGPATH_W) '$(srcdir)/frontends/gconf/gconf.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) frontends/gconf/$(DEPDIR)/kconfig_gconf-gconf.Tpo frontends/gconf/$(DEPDIR)/kconfig_gconf-gconf.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='frontends/gconf/gconf.c' object='frontends/gconf/kconfig_gconf-gconf.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(frontends_gconf_kconfig_gconf_CPPFLAGS) $(CPPFLAGS) $(frontends_gconf_kconfig_gconf_CFLAGS) $(CFLAGS) -c -o frontends/gconf/kconfig_gconf-gconf.obj `if test -f 'frontends/gconf/gconf.c'; then $(CYGPATH_W) 'frontends/gconf/gconf.c'; else $(CYGPATH_W) '$(srcdir)/frontends/gconf/gconf.c'; fi`
-
 frontends/mconf/kconfig_mconf-mconf.o: frontends/mconf/mconf.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(frontends_mconf_kconfig_mconf_CPPFLAGS) $(CPPFLAGS) $(frontends_mconf_kconfig_mconf_CFLAGS) $(CFLAGS) -MT frontends/mconf/kconfig_mconf-mconf.o -MD -MP -MF frontends/mconf/$(DEPDIR)/kconfig_mconf-mconf.Tpo -c -o frontends/mconf/kconfig_mconf-mconf.o `test -f 'frontends/mconf/mconf.c' || echo '$(srcdir)/'`frontends/mconf/mconf.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) frontends/mconf/$(DEPDIR)/kconfig_mconf-mconf.Tpo frontends/mconf/$(DEPDIR)/kconfig_mconf-mconf.Po
@@ -1568,44 +1335,6 @@ utils/kconfig_gettext-gettext.obj: utils/gettext.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(utils_kconfig_gettext_CPPFLAGS) $(CPPFLAGS) $(utils_kconfig_gettext_CFLAGS) $(CFLAGS) -c -o utils/kconfig_gettext-gettext.obj `if test -f 'utils/gettext.c'; then $(CYGPATH_W) 'utils/gettext.c'; else $(CYGPATH_W) '$(srcdir)/utils/gettext.c'; fi`
 
-.cc.o:
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
-@am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
-@am__fastdepCXX_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXXCOMPILE) -c -o $@ $<
-
-.cc.obj:
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.obj$$||'`;\
-@am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ `$(CYGPATH_W) '$<'` &&\
-@am__fastdepCXX_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
-
-.cc.lo:
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.lo$$||'`;\
-@am__fastdepCXX_TRUE@	$(LTCXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
-@am__fastdepCXX_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LTCXXCOMPILE) -c -o $@ $<
-
-frontends/qconf/kconfig_qconf-qconf.o: frontends/qconf/qconf.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(frontends_qconf_kconfig_qconf_CPPFLAGS) $(CPPFLAGS) $(frontends_qconf_kconfig_qconf_CXXFLAGS) $(CXXFLAGS) -MT frontends/qconf/kconfig_qconf-qconf.o -MD -MP -MF frontends/qconf/$(DEPDIR)/kconfig_qconf-qconf.Tpo -c -o frontends/qconf/kconfig_qconf-qconf.o `test -f 'frontends/qconf/qconf.cc' || echo '$(srcdir)/'`frontends/qconf/qconf.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) frontends/qconf/$(DEPDIR)/kconfig_qconf-qconf.Tpo frontends/qconf/$(DEPDIR)/kconfig_qconf-qconf.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='frontends/qconf/qconf.cc' object='frontends/qconf/kconfig_qconf-qconf.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(frontends_qconf_kconfig_qconf_CPPFLAGS) $(CPPFLAGS) $(frontends_qconf_kconfig_qconf_CXXFLAGS) $(CXXFLAGS) -c -o frontends/qconf/kconfig_qconf-qconf.o `test -f 'frontends/qconf/qconf.cc' || echo '$(srcdir)/'`frontends/qconf/qconf.cc
-
-frontends/qconf/kconfig_qconf-qconf.obj: frontends/qconf/qconf.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(frontends_qconf_kconfig_qconf_CPPFLAGS) $(CPPFLAGS) $(frontends_qconf_kconfig_qconf_CXXFLAGS) $(CXXFLAGS) -MT frontends/qconf/kconfig_qconf-qconf.obj -MD -MP -MF frontends/qconf/$(DEPDIR)/kconfig_qconf-qconf.Tpo -c -o frontends/qconf/kconfig_qconf-qconf.obj `if test -f 'frontends/qconf/qconf.cc'; then $(CYGPATH_W) 'frontends/qconf/qconf.cc'; else $(CYGPATH_W) '$(srcdir)/frontends/qconf/qconf.cc'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) frontends/qconf/$(DEPDIR)/kconfig_qconf-qconf.Tpo frontends/qconf/$(DEPDIR)/kconfig_qconf-qconf.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='frontends/qconf/qconf.cc' object='frontends/qconf/kconfig_qconf-qconf.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(frontends_qconf_kconfig_qconf_CPPFLAGS) $(CPPFLAGS) $(frontends_qconf_kconfig_qconf_CXXFLAGS) $(CXXFLAGS) -c -o frontends/qconf/kconfig_qconf-qconf.obj `if test -f 'frontends/qconf/qconf.cc'; then $(CYGPATH_W) 'frontends/qconf/qconf.cc'; else $(CYGPATH_W) '$(srcdir)/frontends/qconf/qconf.cc'; fi`
-
 .y.c:
 	$(AM_V_YACC)$(am__skipyacc) $(SHELL) $(YLWRAP) $< y.tab.c $@ y.tab.h `echo $@ | $(am__yacc_c2h)` y.output $*.output -- $(YACCCOMPILE)
 
@@ -1615,10 +1344,8 @@ mostlyclean-libtool:
 clean-libtool:
 	-rm -rf .libs _libs
 	-rm -rf frontends/conf/.libs frontends/conf/_libs
-	-rm -rf frontends/gconf/.libs frontends/gconf/_libs
 	-rm -rf frontends/mconf/.libs frontends/mconf/_libs
 	-rm -rf frontends/nconf/.libs frontends/nconf/_libs
-	-rm -rf frontends/qconf/.libs frontends/qconf/_libs
 	-rm -rf libs/parser/.libs libs/parser/_libs
 	-rm -rf utils/.libs utils/_libs
 
@@ -1645,27 +1372,6 @@ uninstall-dist_docDATA:
 	@list='$(dist_doc_DATA)'; test -n "$(docdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(docdir)'; $(am__uninstall_files_from_dir)
-install-frontends_gconf_kconfig_gconfDATA: $(frontends_gconf_kconfig_gconf_DATA)
-	@$(NORMAL_INSTALL)
-	@list='$(frontends_gconf_kconfig_gconf_DATA)'; test -n "$(frontends_gconf_kconfig_gconfdir)" || list=; \
-	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(frontends_gconf_kconfig_gconfdir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(frontends_gconf_kconfig_gconfdir)" || exit 1; \
-	fi; \
-	for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  echo "$$d$$p"; \
-	done | $(am__base_list) | \
-	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(frontends_gconf_kconfig_gconfdir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(frontends_gconf_kconfig_gconfdir)" || exit $$?; \
-	done
-
-uninstall-frontends_gconf_kconfig_gconfDATA:
-	@$(NORMAL_UNINSTALL)
-	@list='$(frontends_gconf_kconfig_gconf_DATA)'; test -n "$(frontends_gconf_kconfig_gconfdir)" || list=; \
-	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(frontends_gconf_kconfig_gconfdir)'; $(am__uninstall_files_from_dir)
 install-pkgconfigDATA: $(pkgconfig_DATA)
 	@$(NORMAL_INSTALL)
 	@list='$(pkgconfig_DATA)'; test -n "$(pkgconfigdir)" || list=; \
@@ -1947,7 +1653,7 @@ all-am: Makefile $(PROGRAMS) $(LIBRARIES) $(LTLIBRARIES) $(SCRIPTS) \
 install-binPROGRAMS: install-libLTLIBRARIES
 
 installdirs:
-	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(docdir)" "$(DESTDIR)$(frontends_gconf_kconfig_gconfdir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(libs_parser_kconfig_includedir)"; do \
+	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(docdir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(libs_parser_kconfig_includedir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: $(BUILT_SOURCES)
@@ -1982,16 +1688,10 @@ distclean-generic:
 	-$(am__rm_f) $(DISTCLEANFILES)
 	-$(am__rm_f) frontends/conf/$(DEPDIR)/$(am__dirstamp)
 	-$(am__rm_f) frontends/conf/$(am__dirstamp)
-	-$(am__rm_f) frontends/gconf/$(DEPDIR)/$(am__dirstamp)
-	-$(am__rm_f) frontends/gconf/$(am__dirstamp)
 	-$(am__rm_f) frontends/mconf/$(DEPDIR)/$(am__dirstamp)
 	-$(am__rm_f) frontends/mconf/$(am__dirstamp)
 	-$(am__rm_f) frontends/nconf/$(DEPDIR)/$(am__dirstamp)
 	-$(am__rm_f) frontends/nconf/$(am__dirstamp)
-	-$(am__rm_f) frontends/qconf/$(DEPDIR)/$(am__dirstamp)
-	-$(am__rm_f) frontends/qconf/$(am__dirstamp)
-	-$(am__rm_f) libs/images/$(DEPDIR)/$(am__dirstamp)
-	-$(am__rm_f) libs/images/$(am__dirstamp)
 	-$(am__rm_f) libs/lxdialog/$(DEPDIR)/$(am__dirstamp)
 	-$(am__rm_f) libs/lxdialog/$(am__dirstamp)
 	-$(am__rm_f) libs/parser/$(DEPDIR)/$(am__dirstamp)
@@ -2014,12 +1714,9 @@ clean-am: clean-binPROGRAMS clean-generic clean-libLTLIBRARIES \
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -f frontends/conf/$(DEPDIR)/kconfig_conf-conf.Po
-	-rm -f frontends/gconf/$(DEPDIR)/kconfig_gconf-gconf.Po
 	-rm -f frontends/mconf/$(DEPDIR)/kconfig_mconf-mconf.Po
 	-rm -f frontends/nconf/$(DEPDIR)/kconfig_nconf-nconf.Po
 	-rm -f frontends/nconf/$(DEPDIR)/kconfig_nconf-nconf.gui.Po
-	-rm -f frontends/qconf/$(DEPDIR)/kconfig_qconf-qconf.Po
-	-rm -f libs/images/$(DEPDIR)/images.Po
 	-rm -f libs/lxdialog/$(DEPDIR)/libkconfig_lxdialog_a-checklist.Po
 	-rm -f libs/lxdialog/$(DEPDIR)/libkconfig_lxdialog_a-inputbox.Po
 	-rm -f libs/lxdialog/$(DEPDIR)/libkconfig_lxdialog_a-menubox.Po
@@ -2052,7 +1749,6 @@ info: info-am
 info-am:
 
 install-data-am: install-dist_docDATA \
-	install-frontends_gconf_kconfig_gconfDATA \
 	install-libs_parser_kconfig_includeHEADERS \
 	install-pkgconfigDATA
 
@@ -2087,12 +1783,9 @@ maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
 	-rm -f frontends/conf/$(DEPDIR)/kconfig_conf-conf.Po
-	-rm -f frontends/gconf/$(DEPDIR)/kconfig_gconf-gconf.Po
 	-rm -f frontends/mconf/$(DEPDIR)/kconfig_mconf-mconf.Po
 	-rm -f frontends/nconf/$(DEPDIR)/kconfig_nconf-nconf.Po
 	-rm -f frontends/nconf/$(DEPDIR)/kconfig_nconf-nconf.gui.Po
-	-rm -f frontends/qconf/$(DEPDIR)/kconfig_qconf-qconf.Po
-	-rm -f libs/images/$(DEPDIR)/images.Po
 	-rm -f libs/lxdialog/$(DEPDIR)/libkconfig_lxdialog_a-checklist.Po
 	-rm -f libs/lxdialog/$(DEPDIR)/libkconfig_lxdialog_a-inputbox.Po
 	-rm -f libs/lxdialog/$(DEPDIR)/libkconfig_lxdialog_a-menubox.Po
@@ -2126,7 +1819,6 @@ ps-am:
 
 uninstall-am: uninstall-binPROGRAMS uninstall-binSCRIPTS \
 	uninstall-dist_binSCRIPTS uninstall-dist_docDATA \
-	uninstall-frontends_gconf_kconfig_gconfDATA \
 	uninstall-libLTLIBRARIES \
 	uninstall-libs_parser_kconfig_includeHEADERS \
 	uninstall-pkgconfigDATA
@@ -2145,8 +1837,7 @@ uninstall-am: uninstall-binPROGRAMS uninstall-binSCRIPTS \
 	install-binPROGRAMS install-binSCRIPTS install-data \
 	install-data-am install-dist_binSCRIPTS install-dist_docDATA \
 	install-dvi install-dvi-am install-exec install-exec-am \
-	install-frontends_gconf_kconfig_gconfDATA install-html \
-	install-html-am install-info install-info-am \
+	install-html install-html-am install-info install-info-am \
 	install-libLTLIBRARIES \
 	install-libs_parser_kconfig_includeHEADERS install-man \
 	install-pdf install-pdf-am install-pkgconfigDATA install-ps \
@@ -2156,7 +1847,6 @@ uninstall-am: uninstall-binPROGRAMS uninstall-binSCRIPTS \
 	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-am uninstall \
 	uninstall-am uninstall-binPROGRAMS uninstall-binSCRIPTS \
 	uninstall-dist_binSCRIPTS uninstall-dist_docDATA \
-	uninstall-frontends_gconf_kconfig_gconfDATA \
 	uninstall-libLTLIBRARIES \
 	uninstall-libs_parser_kconfig_includeHEADERS \
 	uninstall-pkgconfigDATA
@@ -2184,21 +1874,6 @@ uninstall-am: uninstall-binPROGRAMS uninstall-binSCRIPTS \
 # because it would think no file was generated.
 .l.c:
 	$(AM_V_LEX)$(LEXCOMPILE) -o$@ $<
-
-@COND_images_TRUE@libs/images/images.c: libs/images/images.c_orig
-@COND_images_TRUE@	$(AM_V_GEN)$(SED) -e 's/^static //' $< >$@
-
-@COND_images_TRUE@libs/images/images.h: libs/images/images.c_orig
-@COND_images_TRUE@	$(AM_V_GEN)$(SED) -e '/^static \(const char \*xpm_\(.\{1,\}\)\[\]\) = {/!d; s//extern \1;/' \
-@COND_images_TRUE@		$< >$@
-
-@COND_kconfig_TRUE@frontends/kconfig: frontends/kconfig.in
-@COND_kconfig_TRUE@	$(AM_V_GEN)$(SED) -e 's/@KCFG_LIST@/$(kcfg_list)/g' \
-@COND_kconfig_TRUE@		$< >$@
-@COND_kconfig_TRUE@	@chmod +x $@
-
-@COND_qconf_TRUE@.h.moc:
-@COND_qconf_TRUE@	$(AM_V_MOC)$(MOC) -i $< -o $@
 
 @COND_utils_TRUE@utils/kconfig-tweak: utils/kconfig-tweak.in
 @COND_utils_TRUE@	$(MKDIR_P) $(@D)

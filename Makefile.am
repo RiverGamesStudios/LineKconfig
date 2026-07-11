@@ -136,48 +136,9 @@ libs_lxdialog_liblxdialog_a_CFLAGS = \
 
 endif # COND_lxdialog
 
-#--------------------------
-# kconfig meta frontend
-if COND_images
-
-noinst_LIBRARIES += libs/images/libkconfig-images.a
-
-libs_images_libkconfig_images_a_SOURCES = libs/images/images.c_orig
-nodist_libs_images_libkconfig_images_a_SOURCES = libs/images/images.c
-
-libs/images/images.c: libs/images/images.c_orig
-	$(AM_V_GEN)$(SED) -e 's/^static //' $< >$@
-
-libs/images/images.h: libs/images/images.c_orig
-	$(AM_V_GEN)$(SED) -e '/^static \(const char \*xpm_\(.\{1,\}\)\[\]\) = {/!d; s//extern \1;/' \
-		$< >$@
-
-BUILT_SOURCES += \
-	libs/images/images.c \
-	libs/images/images.h
-CLEANFILES += \
-	libs/images/images.c \
-	libs/images/images.h
-
-endif # COND_images
 
 #===============================================================================
 # Frontends
-
-#--------------------------
-# kconfig meta frontend
-if COND_kconfig
-
-bin_SCRIPTS += frontends/kconfig
-
-frontends/kconfig: frontends/kconfig.in
-	$(AM_V_GEN)$(SED) -e 's/@KCFG_LIST@/$(kcfg_list)/g' \
-		$< >$@
-	@chmod +x $@
-
-EXTRA_DIST += frontends/kconfig.in
-
-endif # COND_kconfig
 
 #--------------------------
 # conf frontend
@@ -247,77 +208,6 @@ frontends_nconf_kconfig_nconf_LDADD = \
 	$(nconf_EXTRA_LIBS)
 
 endif # COND_nconf
-
-#--------------------------
-# gconf frontend
-if COND_gconf
-
-bin_PROGRAMS += frontends/gconf/kconfig-gconf
-
-frontends_gconf_kconfig_gconf_SOURCES = \
-	frontends/gconf/gconf.c \
-	frontends/gconf/gconf.glade
-frontends_gconf_kconfig_gconf_CPPFLAGS = \
-	$(AM_CPPFLAGS) \
-	$(intl_CPPFLAGS) \
-	-I$(top_srcdir)/libs/parser \
-	-I$(top_builddir)/libs/images \
-	-DGUI_PATH='"$(pkgdatadir)/gconf.glade"'
-frontends_gconf_kconfig_gconf_CFLAGS = \
-	$(AM_CFLAGS) \
-	$(kf_CFLAGS) \
-	$(gtk_CFLAGS)
-frontends_gconf_kconfig_gconf_LDADD = \
-	$(top_builddir)/libs/parser/libkconfig-parser.la \
-	$(top_builddir)/libs/images/libkconfig-images.a \
-	$(intl_LIBS) \
-	$(gtk_LIBS) \
-	$(gconf_EXTRA_LIBS)
-frontends_gconf_kconfig_gconfdir = $(pkgdatadir)
-frontends_gconf_kconfig_gconf_DATA = frontends/gconf/gconf.glade
-
-EXTRA_DIST += frontends/gconf/gconf.c.patch
-
-endif # COND_gconf
-
-#--------------------------
-# gconf frontend
-if COND_qconf
-
-bin_PROGRAMS += frontends/qconf/kconfig-qconf
-
-frontends_qconf_kconfig_qconf_SOURCES = \
-	frontends/qconf/qconf.cc \
-	frontends/qconf/qconf.h
-BUILT_SOURCES += frontends/qconf/qconf.moc
-frontends_qconf_kconfig_qconf_CPPFLAGS = \
-	$(AM_CPPFLAGS) \
-	$(intl_CPPFLAGS) \
-	-I$(top_srcdir)/libs/parser \
-	-I$(top_builddir)/libs/images \
-	-I$(top_builddir)/frontends/qconf
-frontends_qconf_kconfig_qconf_CXXFLAGS = \
-	$(AM_CXXFLAGS) \
-	$(kf_CFLAGS) \
-	$(Qt5_CFLAGS) \
-	-fPIC -std=c++11
-frontends_qconf_kconfig_qconf_LDADD = \
-	$(top_builddir)/libs/parser/libkconfig-parser.la \
-	$(top_builddir)/libs/images/libkconfig-images.a \
-	$(intl_LIBS) $(Qt5_LIBS) $(qconf_EXTRA_LIBS)
-
-AM_V_MOC = $(AM_V_MOC_$(V))
-AM_V_MOC_ = $(AM_V_MOC_$(AM_DEFAULT_VERBOSITY))
-AM_V_MOC_0 = @echo "  MOC     " $@;
-AM_V_MOC_1 =
-
-.h.moc:
-	$(AM_V_MOC)$(MOC) -i $< -o $@
-
-CLEANFILES += frontends/qconf/qconf.moc
-EXTRA_DIST += frontends/qconf/qconf.cc.patch
-
-endif # COND_qconf
 
 #===============================================================================
 # Utilities

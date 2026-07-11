@@ -117,13 +117,6 @@ AC_SUBST([enable_L10n], [${enable_L10n:-yes}])
 # Options to selectively enable/disable frontends
 # All are selected by default
 AC_ARG_ENABLE(
-    [kconfig],
-    [AS_HELP_STRING(
-        [--disable-kconfig],
-        [kconfig, the meta-frontend to all kconfig tools (default=yes)])])
-AC_SUBST([enable_kconfig], [${enable_kconfig:-yes}])
-
-AC_ARG_ENABLE(
     [conf],
     [AS_HELP_STRING(
         [--disable-conf],
@@ -141,18 +134,6 @@ AC_ARG_ENABLE(
         [--disable-nconf],
         [nconf, the modern ncurses-based frontend (default=auto)])])
 AC_SUBST([enable_nconf], [${enable_nconf:-auto}])
-AC_ARG_ENABLE(
-    [gconf],
-    [AS_HELP_STRING(
-        [--disable-gconf],
-        [gconf, the GTK-based frontend (default=auto)])])
-AC_SUBST([enable_gconf], [${enable_gconf:-auto}])
-AC_ARG_ENABLE(
-    [qconf],
-    [AS_HELP_STRING(
-        [--disable-qconf],
-        [qconf, the QT-based frontend (default=auto)])])
-AC_SUBST([enable_qconf], [${enable_qconf:-auto}])
 
 AC_ARG_ENABLE(
     [frontends],
@@ -185,13 +166,6 @@ AS_CASE(
     [*auto*], [need_curses=auto],
               [need_curses=no])
 [need_panel_menu="$enable_nconf"]
-AS_CASE(
-    ["$enable_gconf":"$enable_qconf"],
-    [*yes*],  [need_pkgconfig=yes],
-    [*auto*], [need_pkgconfig=yes],
-              [need_pkgconfig=no ])
-[need_gtk="$enable_gconf"]
-[need_qt="$enable_qconf"]
 
 #---------------------------------------------------------------------------
 # Now check we have the required stuff
@@ -200,12 +174,8 @@ AS_CASE(
 # Some program checks
 AC_PROG_CC
 AM_PROG_CC_C_O
-AC_PROG_CXX
 AC_C_INLINE
 AC_PROG_MAKE_SET
-AS_IF(
-    [test "$need_pkgconfig" = "yes"],
-    [PKG_PROG_PKG_CONFIG()])
 # Look for `lex'. If it cannot be found, autoconf sets $LEX to ':'.
 AC_PROG_LEX
 AS_IF(
@@ -232,37 +202,6 @@ AC_CHECK_PROGS(
 AS_IF(
     [test -z "$GPERF"],
     [AC_MSG_ERROR([can not find gperf])])
-
-# gperf 3.1 generates functions with 'size_t' instead of 'unsigned int'
-AC_MSG_CHECKING([for the type used in gperf declarations])
-GPERF_LEN_TYPE=
-AS_VAR_SET(
-    [GPERF_PROLOG],
-    [`echo foo,bar | ${GPERF} -L ANSI-C`])
-AC_COMPILE_IFELSE(
-    [AC_LANG_PROGRAM(
-        [[
-        #include <string.h>
-        ${GPERF_PROLOG}
-        const char * in_word_set(const char *, size_t);
-        ]])
-    ],
-    [GPERF_LEN_TYPE='size_t'],
-    [
-    AC_COMPILE_IFELSE(
-        [AC_LANG_PROGRAM(
-            [[
-            #include <string.h>
-            ${GPERF_PROLOG}
-            const char * in_word_set(const char *, unsigned int);
-            ]])
-        ],
-        [GPERF_LEN_TYPE='unsigned int'],
-        [AC_MSG_RESULT([not size_t, not unsigned int. What else?])
-         AC_MSG_FAILURE([unable to detect the type used in gperf declarations])
-        ])])
-AC_MSG_RESULT([${GPERF_LEN_TYPE}])
-AC_SUBST([GPERF_LEN_TYPE])
 
 #----------------------------------------
 # Check for gettext, for the kconfig frontends
@@ -380,70 +319,16 @@ AS_IF(
     [enable_nconf=no])
 
 #----------------------------------------
-# Check headers and libs for gconf
-AS_IF(
-    [test "$need_gtk" = "yes" -o "$need_gtk" = "auto"],
-    [PKG_CHECK_MODULES(
-        [gtk],
-        [gtk+-2.0 gmodule-2.0 libglade-2.0],
-        [has_gtk=yes],
-        [AS_IF(
-            [test "$need_gtk" = "yes"],
-            [AC_MSG_ERROR([could not find GTK+ headers and/or libraries (frontend: gconf)])],
-            [has_gtk=no])])])
-
-AS_IF(
-    [test "$has_gtk" = "no" ],
-    [enable_gconf=no])
-
-#----------------------------------------
-# Check headers and libs for qconf
-AS_IF(
-    [test "$need_qt" = "yes" -o "$need_qt" = "auto"],
-    [PKG_CHECK_MODULES(
-        [Qt5],
-        [Qt5Core Qt5Gui Qt5Widgets],
-        [has_qt=yes; need_moc="$need_qt"],
-        [AS_IF(
-            [test "$need_qt" = "yes"],
-            [AC_MSG_ERROR([could not find Qt5 headers and/or libraries (frontend: qconf)])],
-            [has_qt=no; need_moc=no])])])
-
-AC_ARG_VAR([MOC], [Qt5 meta object compiler (moc) command])
-AS_IF(
-    [test "$need_moc" = "yes" -o "$need_moc" = "auto"],
-    [QT5_BINDIR=`$PKG_CONFIG Qt5Core --variable host_bins`
-     AC_PATH_PROGS(
-        [MOC],
-        [moc-qt5 moc],,
-        [$QT5_BINDIR:$PATH])
-     AS_IF(
-        [test -n "$MOC"],
-        [has_moc=yes],
-        [AS_IF(
-            [test "$need_moc" = "yes"],
-            [AC_MSG_ERROR([could not find moc (frontend: qconf)])],
-            [has_moc=no])])])
-
-AS_IF(
-    [test "$has_qt" = "no" -o "$has_moc" = "no"],
-    [enable_qconf=no])
-
-#----------------------------------------
 # Per-frontends extra libraries
 AC_ARG_VAR([conf_EXTRA_LIBS],  [Extra libraries to build the conf frontend] )
-AC_ARG_VAR([gconf_EXTRA_LIBS], [Extra libraries to build the gconf frontend])
 AC_ARG_VAR([mconf_EXTRA_LIBS], [Extra libraries to build the mconf frontend])
 AC_ARG_VAR([nconf_EXTRA_LIBS], [Extra libraries to build the nconf frontend])
-AC_ARG_VAR([qconf_EXTRA_LIBS], [Extra libraries to build the qconf frontend])
 
 #---------------------------------------------------------------------------
 # Now, we know what frontends to enable
 AS_IF([test "$enable_conf"  = "auto"], [enable_conf=yes ])
-AS_IF([test "$enable_gconf" = "auto"], [enable_gconf=yes])
 AS_IF([test "$enable_mconf" = "auto"], [enable_mconf=yes])
 AS_IF([test "$enable_nconf" = "auto"], [enable_nconf=yes])
-AS_IF([test "$enable_qconf" = "auto"], [enable_qconf=yes])
 
 #----------------------------------------
 # Check if the lxdialog library should be built
@@ -452,18 +337,9 @@ AS_IF(
     [need_lxdialog=yes],
     [need_lxdialog=no])
 
-#----------------------------------------
-# Check if the images library should be built
-AS_IF(
-    [test "$enable_gconf" = "yes" -o "$enable_qconf" = "yes"],
-    [need_images=yes],
-    [need_images=no])
 
 #----------------------------------------
 # Setup automake conditional build
-AM_CONDITIONAL(
-    [COND_kconfig],
-    [test "$enable_kconfig" = "yes"])
 AM_CONDITIONAL(
     [COND_conf],
     [test "$enable_conf" = "yes"])
@@ -474,17 +350,8 @@ AM_CONDITIONAL(
     [COND_nconf],
     [test "$enable_nconf" = "yes"])
 AM_CONDITIONAL(
-    [COND_gconf],
-    [test "$enable_gconf" = "yes"])
-AM_CONDITIONAL(
-    [COND_qconf],
-    [test "$enable_qconf" = "yes"])
-AM_CONDITIONAL(
     [COND_lxdialog],
     [test "$need_lxdialog" = "yes"])
-AM_CONDITIONAL(
-    [COND_images],
-    [test "$need_images" = "yes"])
 AM_CONDITIONAL(
     [COND_utils],
     [test "$enable_utils" = "yes"])
@@ -502,10 +369,8 @@ AC_SUBST(
 # Pretty-print the configuration settings
 [fe_list=]
 AS_IF([test "$enable_conf"  = "yes"], [fe_list="$fe_list conf" ])
-AS_IF([test "$enable_gconf" = "yes"], [fe_list="$fe_list gconf"])
 AS_IF([test "$enable_mconf" = "yes"], [fe_list="$fe_list mconf"])
 AS_IF([test "$enable_nconf" = "yes"], [fe_list="$fe_list nconf"])
-AS_IF([test "$enable_qconf" = "yes"], [fe_list="$fe_list qconf"])
 # The meta frontend is handled separatly, below, because we do not
 # want it in the list of tools, kcfg_list.
 
@@ -513,8 +378,6 @@ AS_IF([test "$enable_qconf" = "yes"], [fe_list="$fe_list qconf"])
 AS_IF([test "$enable_utils" = "yes"], [kcfg_list="$kcfg_list diff merge tweak"])
 AS_IF([test "$has_gettext" = "yes"],  [kcfg_list="$kcfg_list gettext"])
 AC_SUBST([kcfg_list], [${kcfg_list}])
-
-AS_IF([test "$enable_kconfig" = "yes"], [fe_list=" kconfig$fe_list"])
 
 [lib_list=]
 AS_IF(
